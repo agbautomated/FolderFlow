@@ -14,11 +14,7 @@ public sealed record Preferences
 
 public static class PreferenceStore
 {
-    // A workspace-local override keeps integration tests away from personal settings.
-    public static string DataDirectory => Path.GetFullPath(
-        Environment.GetEnvironmentVariable("FOLDERFLOW_DATA_DIR") is { Length: > 0 } configured
-            ? configured
-            : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FolderFlow"));
+    public static string DataDirectory => AppDataPaths.DataDirectory;
 
     public static Preferences Load(out string? warning)
     {

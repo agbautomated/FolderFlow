@@ -2,6 +2,12 @@
 
 A small Windows desktop application for copying folders between connected drives. Choose **Copy from**, choose **Copy to**, and select **Start Copy**. FolderFlow runs the real RoboCopy included with Windows.
 
+## Microsoft Store preparation
+
+The project includes a Windows 11 MSIX packaging path for a proposed one-time paid Store release. See the [account and submission guide](docs/STORE-SUBMISSION.md), [packaging instructions](packaging/README.md), [listing draft](docs/STORE-LISTING-DRAFT.md), and [privacy policy](docs/PRIVACY.md). The initial recommendation is paid upfront with no trial.
+
+A development MSIX has passed package-structure validation. The final Store identity, account verification, price, installed-package tests, and Microsoft certification are still required. The development identity must not be uploaded as the Store product. See [Store validation status](docs/STORE-VALIDATION.md).
+
 ## Run
 
 This repository contains the application source, tests, and build scripts. Build the app using the steps below, or, if you already have `FolderFlow-Windows-x64.zip`, extract it and open `FolderFlow.exe` inside the extracted folder. Alternatively, open `Launch FolderFlow.cmd` alongside the source to start an existing portable build. Keep the complete portable folder together. The portable app does not need administrator rights or a separate .NET installation. The executable is unsigned, so Windows may identify it as an unfamiliar application.
@@ -85,7 +91,7 @@ RoboCopy is launched from the Windows system folder with `UseShellExecute = fals
 
 Copy mode uses `/E`; mirror uses `/E /PURGE` to synchronize contents without `/MIR`'s additional root security behavior. Both use `/COPY:DAT`, `/DCOPY:DAT`, link exclusions, bounded retries, full paths, and numeric byte sizes. The default worker setting adds `/MT:2`; normal copying uses `/Z`, the large-file setting chooses `/J`, and preview adds `/L`. These implementation details stay out of the main workflow.
 
-Preferences normally live in `%LOCALAPPDATA%\FolderFlow\preferences.json`. Saved logs go in its `Logs` subfolder. A native UTF-16 `/UNILOG` file is used for reliable Unicode progress and result parsing because redirected `/UNICODE` console output can mix encodings on Windows. With saved logs disabled, the private transcript is removed when the run ends. FolderFlow needs a writable data folder to create that transcript; it stops before copying if this cannot be prepared. Test or development runs can set `FOLDERFLOW_DATA_DIR` to keep settings and diagnostics in a disposable location. Logs can contain full file paths; the app does not upload them.
+Preferences normally live in `%LOCALAPPDATA%\FolderFlow\preferences.json` for the portable app. The MSIX app uses its package-owned `LocalState\FolderFlow` directory; Settings → About shows the exact location. Saved logs go in its `Logs` subfolder. A native UTF-16 `/UNILOG` file is used for reliable Unicode progress and result parsing because redirected `/UNICODE` console output can mix encodings on Windows. With saved logs disabled, cleanup of the private transcript is attempted when the run ends; an interruption or permission problem can leave it behind. FolderFlow needs a writable data folder to create that transcript; it stops before copying if this cannot be prepared. Test or development runs can set `FOLDERFLOW_DATA_DIR` to keep settings and diagnostics in a disposable location. Logs can contain full file paths; the app does not upload them.
 
 The intentionally small workflow offers Copy/Mirror and Stop. It does not expose source-deleting move operations or process suspension. Rerunning an interrupted copy is the recovery path.
 

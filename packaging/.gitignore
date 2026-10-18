@@ -1,0 +1,8 @@
+work/
+identity.config.json
+*.msix
+*.msixupload
+*.appx
+*.pfx
+*.p12
+*.cer

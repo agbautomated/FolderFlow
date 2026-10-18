@@ -1,0 +1,10 @@
+{
+  "$schema": "./identity.schema.json",
+  "name": "REPLACE.WITH.PARTNER.CENTER.PACKAGE.IDENTITY.NAME",
+  "publisher": "CN=REPLACE-WITH-PARTNER-CENTER-PUBLISHER-ID",
+  "publisherDisplayName": "REPLACE WITH YOUR VERIFIED PUBLISHER DISPLAY NAME",
+  "displayName": "FolderFlow",
+  "version": "1.0.0.0",
+  "architecture": "x64",
+  "minOSVersion": "10.0.22000.0"
+}

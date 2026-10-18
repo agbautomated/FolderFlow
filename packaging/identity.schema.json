@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FolderFlow Microsoft Store package identity",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "publisher", "publisherDisplayName", "displayName", "version", "architecture", "minOSVersion"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": { "type": "string", "minLength": 3, "maxLength": 50, "pattern": "^[A-Za-z0-9.-]+$" },
+    "publisher": { "type": "string", "minLength": 3, "maxLength": 8192, "description": "Exact Package/Identity/Publisher from Partner Center, including CN=." },
+    "publisherDisplayName": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "displayName": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+\\.0$", "description": "Four integer components, 0..65535 each; Store requires fourth component 0 and first component > 0." },
+    "architecture": { "enum": ["x64", "arm64"] },
+    "minOSVersion": { "type": "string", "pattern": "^10\\.0\\.[0-9]+\\.[0-9]+$", "description": "Technical OS floor, at least 10.0.22000.0. Recommend Windows 11 for supported consumer use." }
+  }
+}

@@ -39,6 +39,7 @@ sealed class IntegrationSuite
         Console.WriteLine($"Real RoboCopy integration checks. Fixtures: {fixtureRoot}");
         try
         {
+            await Check("Local data: shared physical path, portable fallback, and test isolation", DataPathsAsync);
             await Check("Copy: Unicode, spaces, empty folders, unrelated destination files, and result counts", CopyAsync);
             await Check("Copy: changed source replaces the destination version", ChangedFileAsync);
             await Check("Mirror: deletes only destination extras and keeps source files", MirrorAsync);
@@ -76,6 +77,24 @@ sealed class IntegrationSuite
         try { await test(); passed++; Console.WriteLine($"PASS  {name}"); }
         catch (SkippedCheck ex) { skipped++; Console.WriteLine($"SKIP  {name}: {ex.Message}"); }
         catch (Exception ex) { failed++; Console.WriteLine($"FAIL  {name}\n{ex}"); }
+    }
+
+    private Task DataPathsAsync()
+    {
+        string? previous = Environment.GetEnvironmentVariable("FOLDERFLOW_DATA_DIR");
+        try
+        {
+            Equal(Path.Combine(fixtureRoot, "appdata"), AppDataPaths.DataDirectory, "isolated test data directory");
+            // A relative override is resolved once to a physical full path for every caller.
+            string relative = Path.Combine("work", "folderflow-path-check");
+            Environment.SetEnvironmentVariable("FOLDERFLOW_DATA_DIR", relative);
+            Equal(Path.GetFullPath(relative), AppDataPaths.DataDirectory, "relative data override");
+            Environment.SetEnvironmentVariable("FOLDERFLOW_DATA_DIR", null);
+            Equal(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FolderFlow"),
+                AppDataPaths.DataDirectory, "portable builds retain their existing data directory");
+        }
+        finally { Environment.SetEnvironmentVariable("FOLDERFLOW_DATA_DIR", previous); }
+        return Task.CompletedTask;
     }
 
     private async Task CopyAsync()

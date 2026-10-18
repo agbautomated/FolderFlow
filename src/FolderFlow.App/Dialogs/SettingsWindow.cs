@@ -48,6 +48,14 @@ public sealed class SettingsWindow : Window
         body.Children.Add(retries);
         body.Children.Add(DialogUi.Text("Waits two seconds between attempts, then continues with the other files.", muted: true));
 
+        body.Children.Add(Heading("Help and privacy"));
+        var about = DialogUi.Button("About FolderFlow");
+        about.HorizontalAlignment = HorizontalAlignment.Left;
+        about.Margin = new Thickness(0, 0, 0, 5);
+        about.Click += (_, _) => new AboutWindow { Owner = this }.ShowDialog();
+        body.Children.Add(about);
+        body.Children.Add(DialogUi.Text("Version, local data, privacy, and support.", muted: true));
+
         var cancel = DialogUi.Button("Cancel");
         cancel.IsCancel = true;
         var save = DialogUi.Button("Save", primary: true);

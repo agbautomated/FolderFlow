@@ -60,8 +60,7 @@ public sealed class RobocopyRunner(string? logDirectory = null)
             // /UNICODE stdout is mixed OEM/UTF-16 on some Windows builds. A native
             // /UNILOG is authoritative UTF-16 and is tailed for both progress and results.
             // With SaveLog off this is a private temporary transcript, deleted on exit.
-            string dataDirectory = Environment.GetEnvironmentVariable("FOLDERFLOW_DATA_DIR") ?? Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FolderFlow");
+            string dataDirectory = AppDataPaths.DataDirectory;
             string directory = Path.GetFullPath(logDirectory ?? Path.Combine(dataDirectory, job.Settings.SaveLog ? "Logs" : "Temporary"));
             string canonicalLogDirectory;
             try

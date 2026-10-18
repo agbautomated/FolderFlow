@@ -7,3 +7,13 @@ portable/
 work/
 *.zip
 .idea/
+packaging/work/
+packaging/output/
+packaging/identity.local.json
+*.msix
+*.msixbundle
+*.appx
+*.appxupload
+*.msixupload
+*.pfx
+*.p12
