@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>FolderFlow</AssemblyName>
+    <RootNamespace>FolderFlow.App</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\FolderFlow.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <Description>Simple, careful folder copying with Windows RoboCopy.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FolderFlow.Core\FolderFlow.Core.csproj" />
+  </ItemGroup>
+</Project>

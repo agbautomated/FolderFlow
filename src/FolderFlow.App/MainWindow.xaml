@@ -1,0 +1,78 @@
+<Window x:Class="FolderFlow.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="FolderFlow" Width="880" Height="830" MinWidth="640" MinHeight="620" Style="{StaticResource {x:Type Window}}"
+        WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+  <Grid Margin="32,20,32,22">
+    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <DockPanel Margin="0,0,0,18">
+      <Button x:Name="SettingsButton" Content="Settings" Style="{StaticResource LinkButton}" DockPanel.Dock="Right" Click="Settings_Click" AutomationProperties.Name="Settings"/>
+      <StackPanel VerticalAlignment="Center"><TextBlock Text="FolderFlow" FontWeight="SemiBold" FontSize="21"/><TextBlock Text="A little care for your files." Foreground="{DynamicResource MutedBrush}" FontSize="12" Margin="0,2,0,0"/></StackPanel>
+    </DockPanel>
+    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+      <Grid MaxWidth="740" VerticalAlignment="Top" Margin="0,4,0,4">
+        <StackPanel x:Name="SetupView">
+          <TextBlock Text="Make room for what’s next." FontSize="29" FontWeight="SemiBold" Margin="0,0,0,7"/>
+          <TextBlock Text="Choose two folders. We’ll take it from here." Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,24"/>
+          <Border Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="12" Padding="24">
+            <StackPanel>
+              <TextBlock Text="Copy from" FontWeight="SemiBold" FontSize="16" Margin="0,0,0,9"/>
+              <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                <TextBox x:Name="SourceBox" AutomationProperties.Name="Copy from folder" TextChanged="Path_Changed" ToolTip="Choose a folder on your USB hard drive, or paste its full path."/>
+                <Button Grid.Column="1" Content="Choose folder" Margin="10,0,0,0" Click="ChooseSource_Click" AutomationProperties.Name="Choose source folder"/>
+              </Grid>
+              <TextBlock x:Name="SourceHint" Text="The folder with the files you want to bring along." Foreground="{DynamicResource MutedBrush}" FontSize="12" Margin="0,7,0,23"/>
+              <TextBlock Text="Copy to" FontWeight="SemiBold" FontSize="16" Margin="0,0,0,9"/>
+              <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                <TextBox x:Name="DestinationBox" AutomationProperties.Name="Copy to folder" TextChanged="Path_Changed" ToolTip="Choose an existing, dedicated folder on your USB SSD, or paste its full path."/>
+                <Button Grid.Column="1" Content="Choose folder" Margin="10,0,0,0" Click="ChooseDestination_Click" AutomationProperties.Name="Choose destination folder"/>
+              </Grid>
+              <TextBlock x:Name="DestinationHint" Text="Files go directly inside this folder." Foreground="{DynamicResource MutedBrush}" FontSize="12" Margin="0,7,0,0"/>
+            </StackPanel>
+          </Border>
+          <TextBlock Text="How should we copy?" FontWeight="SemiBold" FontSize="15" Margin="0,23,0,10"/>
+          <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+            <RadioButton x:Name="CopyChoice" GroupName="Mode" IsChecked="True" Style="{StaticResource ModeChoice}" AutomationProperties.Name="Copy files">
+              <StackPanel><TextBlock Text="Copy files" FontWeight="SemiBold"/><TextBlock Text="Copy new and changed files. Keep other destination files." Foreground="{DynamicResource MutedBrush}" FontSize="12" Margin="0,5,0,0"/></StackPanel>
+            </RadioButton>
+            <RadioButton x:Name="MirrorChoice" Grid.Column="2" GroupName="Mode" Style="{StaticResource ModeChoice}" AutomationProperties.Name="Mirror folders">
+              <StackPanel><TextBlock Text="Mirror folders" FontWeight="SemiBold"/><TextBlock Text="Match the source. Delete destination items missing from it." Foreground="{DynamicResource MutedBrush}" FontSize="12" Margin="0,5,0,0"/></StackPanel>
+            </RadioButton>
+          </Grid>
+          <TextBlock Text="Existing files with the same name may be replaced in either mode." Foreground="{DynamicResource MutedBrush}" FontSize="12" Margin="0,10,0,0"/>
+          <Border x:Name="ErrorPanel" Visibility="Collapsed" BorderBrush="{DynamicResource WarningBrush}" BorderThickness="1" CornerRadius="7" Padding="14" Margin="0,17,0,0"><TextBlock x:Name="ErrorText" AutomationProperties.LiveSetting="Polite"/></Border>
+          <Grid Margin="0,24,0,10"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+            <Button x:Name="PreviewButton" HorizontalAlignment="Left" Content="Preview changes" Style="{StaticResource LinkButton}" Click="Preview_Click" ToolTip="Check what would change without copying or deleting files."/>
+            <Button x:Name="StartButton" Grid.Column="1" Content="Start Copy" Style="{StaticResource PrimaryButton}" Click="Start_Click" IsEnabled="False" MinWidth="170"/>
+          </Grid>
+        </StackPanel>
+        <StackPanel x:Name="ProgressView" Visibility="Collapsed" Margin="0,26,0,0">
+          <Border Width="56" Height="56" CornerRadius="28" Background="{DynamicResource SelectedBrush}" HorizontalAlignment="Left" Margin="0,0,0,20"><TextBlock x:Name="StatusGlyph" Text="↗" FontSize="29" Foreground="{DynamicResource AccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/></Border>
+          <TextBlock x:Name="StatusHeading" Text="Preparing" FontSize="30" FontWeight="SemiBold" AutomationProperties.LiveSetting="Polite"/>
+          <TextBlock x:Name="StatusMessage" Text="Getting your folders ready…" Foreground="{DynamicResource MutedBrush}" Margin="0,9,0,28"/>
+          <Border Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="12" Padding="24">
+            <StackPanel>
+              <TextBlock x:Name="RouteText" FontSize="12" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,15"/>
+              <ProgressBar x:Name="ActivityBar" Height="6" IsIndeterminate="True" Foreground="{DynamicResource AccentBrush}" Background="{DynamicResource BorderBrush}" BorderThickness="0" Margin="0,0,0,18" AutomationProperties.Name="Copy activity"/>
+              <TextBlock x:Name="FileLabel" Text="Reading folders…" FontSize="14" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+              <TextBlock x:Name="ProgressNote" Text="Windows is working. File counts appear when it finishes." Foreground="{DynamicResource MutedBrush}" FontSize="12" Margin="0,7,0,23"/>
+              <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <StackPanel><TextBlock x:Name="CopiedCount" Text="—" FontSize="28" FontWeight="SemiBold"/><TextBlock x:Name="CopiedLabel" Text="files copied" FontSize="12" Foreground="{DynamicResource MutedBrush}"/></StackPanel>
+                <StackPanel Grid.Column="1"><TextBlock x:Name="SkippedCount" Text="—" FontSize="28" FontWeight="SemiBold"/><TextBlock Text="files skipped" FontSize="12" Foreground="{DynamicResource MutedBrush}"/></StackPanel>
+                <StackPanel Grid.Column="2"><TextBlock x:Name="FailedCount" Text="—" FontSize="28" FontWeight="SemiBold"/><TextBlock Text="files failed" FontSize="12" Foreground="{DynamicResource MutedBrush}"/></StackPanel>
+              </Grid>
+            </StackPanel>
+          </Border>
+          <TextBlock x:Name="ElapsedText" Text="Elapsed  0:00" Foreground="{DynamicResource MutedBrush}" FontSize="12" Margin="0,16,0,0"/>
+          <TextBlock x:Name="LogNote" Foreground="{DynamicResource MutedBrush}" FontSize="12" Margin="0,9,0,0"/>
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,27,0,0">
+            <Button x:Name="DetailsButton" Content="View Details" Click="Details_Click" Margin="0,0,10,0" Visibility="Collapsed"/>
+            <Button x:Name="StopButton" Content="Stop" Click="Stop_Click" MinWidth="110"/>
+            <Button x:Name="DoneButton" Content="Done" Style="{StaticResource PrimaryButton}" Click="Done_Click" MinWidth="130" Visibility="Collapsed"/>
+          </StackPanel>
+        </StackPanel>
+      </Grid>
+    </ScrollViewer>
+    <TextBlock Grid.Row="2" Text="Powered by Windows RoboCopy · Made for a careful transfer" Foreground="{DynamicResource MutedBrush}" FontSize="11" HorizontalAlignment="Center" Margin="0,17,0,0"/>
+  </Grid>
+</Window>
