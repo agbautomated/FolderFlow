@@ -19,6 +19,8 @@ public sealed class AboutWindow : Window
         body.Children.Add(DialogUi.Text("FolderFlow", size: 25));
         var version = Assembly.GetExecutingAssembly().GetName().Version;
         body.Children.Add(DialogUi.Text($"Version {version?.ToString(3) ?? "1.0.0"}", muted: true));
+        body.Children.Add(DialogUi.Text("TechDeckLabs", size: 16));
+        body.Children.Add(DialogUi.Text("TECHDECKLABS LLP", muted: true, size: 12));
         body.Children.Add(DialogUi.Text("Careful folder copying with Windows RoboCopy."));
 
         body.Children.Add(Heading("Privacy"));

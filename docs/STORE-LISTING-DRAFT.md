@@ -7,17 +7,17 @@ Draft for the current Copy/Mirror/Stop application. This has not been submitted 
 | Field | Draft / status |
 | --- | --- |
 | Product name | FolderFlow, subject to successful name reservation |
-| Publisher | **Owner input:** exact verified Partner Center publisher |
+| Publisher | **TechDeckLabs**, legal company **TECHDECKLABS LLP**. Company account verification is pending; exact package identity must come from Partner Center after onboarding. |
 | Type | App, MSIX, Windows PC |
 | Category | Utilities & tools, or the closest available utility category |
 | Language | English, matching the current UI |
 | Architecture | x64 for the first validated package |
-| Price | **Owner input:** one-time paid download; no amount selected |
+| Price | **Owner-approved:** one-time **US$4.99 base / ₹299 India override**; not yet entered into Partner Center or published. See [pricing decisions](PRICING.md). |
 | Trial | No free trial for the current version |
 | Website | Existing project: <https://github.com/agbautomated/FolderFlow> |
 | Support | **Owner input:** verified monitored public URL or email |
 | Privacy policy | **Owner input:** verified public policy URL |
-| Copyright / source license | **Owner input:** confirm rights holder and chosen license |
+| Copyright / source license | **© 2026 TECHDECKLABS LLP**. Source license remains an owner decision and has not been chosen. |
 
 ## Short description
 

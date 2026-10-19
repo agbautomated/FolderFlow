@@ -40,7 +40,7 @@ These are public product identifiers, not passwords. Do not substitute `agbautom
 
 In **Account settings → Payout and tax**, create/complete the tax and payout profiles and assign them to the relevant developer program/seller ID. Use the account's real country of residence/business; an India-based owner should select India where the portal requests that country. Complete the forms selected by the portal and wait for validation. Bank beneficiary details must match the bank account. Do not put tax IDs, bank details, identity documents, or account credentials in this repository or chat. [Payout and tax setup](https://learn.microsoft.com/en-us/partner-center/account-settings/set-up-your-payout-account)
 
-For a paid app, open the submission's **Pricing and availability**, choose an available base price, review the generated regional prices, select markets deliberately, and leave **No free trial** selected for this version. The owner must choose the actual price and countries; no price has been approved. [MSIX pricing and availability](https://learn.microsoft.com/en-us/windows/apps/publish/publish-your-app/price-and-availability?pivots=store-installer-msix)
+For a paid app, open the submission's **Pricing and availability**, choose an available base price, review the generated regional prices, select markets deliberately, and leave **No free trial** selected for this version. The approved launch targets are US$4.99 as the base price and ₹299 for India, paid once with no trial. Choose the corresponding allowed tier/range in the portal and review every regional price. Launch countries remain an owner decision. See [the pricing decision](PRICING.md). [MSIX pricing and availability](https://learn.microsoft.com/en-us/windows/apps/publish/publish-your-app/price-and-availability?pivots=store-installer-msix)
 
 Microsoft currently documents a **15% fee for non-game apps using Microsoft's commerce platform**. This is not a promise that 85% of the customer-facing price reaches your bank: taxes, refunds, withholding, currency handling, and the agreement affect proceeds. [Store revenue model](https://learn.microsoft.com/en-us/windows/apps/publish/publish-your-app/why-distribute-through-store)
 
@@ -90,7 +90,7 @@ As of 19 October 2026, the policy page has already published **version 7.20, eff
 | Reserved product name | Not yet confirmed |
 | Exact identity name, publisher and publisher display name | Copy from Partner Center |
 | Store ID | Assigned by Partner Center |
-| One-time base price, regional prices and launch markets | Owner decision |
+| One-time base price, regional prices and launch markets | US$4.99 base and ₹299 India approved for planning; portal entry/regional review and launch markets remain |
 | Tax/payout validation | Owner completes in portal |
 | Public privacy/support URLs or contact | Must be verified before submission |
 | Source license and commercial support terms | Owner decision |

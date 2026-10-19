@@ -1,12 +1,14 @@
 # FolderFlow
 
+By **TechDeckLabs** (**TECHDECKLABS LLP**).
+
 A small Windows desktop application for copying folders between connected drives. Choose **Copy from**, choose **Copy to**, and select **Start Copy**. FolderFlow runs the real RoboCopy included with Windows.
 
 ## Microsoft Store preparation
 
 The project includes a Windows 11 MSIX packaging path for a proposed one-time paid Store release. See the [account and submission guide](docs/STORE-SUBMISSION.md), [packaging instructions](packaging/README.md), [listing draft](docs/STORE-LISTING-DRAFT.md), and [privacy policy](docs/PRIVACY.md). The initial recommendation is paid upfront with no trial.
 
-A development MSIX has passed package-structure validation. The final Store identity, account verification, price, installed-package tests, and Microsoft certification are still required. The development identity must not be uploaded as the Store product. See [Store validation status](docs/STORE-VALIDATION.md).
+A development MSIX has passed package-structure validation. The final Store identity, account verification, Partner Center price entry and regional review, installed-package tests, and Microsoft certification are still required. The approved launch targets are US$4.99 base and ₹299 for India; see [pricing](docs/PRICING.md). The development identity must not be uploaded as the Store product. See [Store validation status](docs/STORE-VALIDATION.md).
 
 ## Run
 

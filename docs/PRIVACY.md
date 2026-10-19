@@ -2,7 +2,7 @@
 
 Effective date: 19 October 2026.
 
-FolderFlow is a Windows desktop application maintained in the [FolderFlow project](https://github.com/agbautomated/FolderFlow). This policy describes the application in this repository, including its planned Microsoft Store distribution.
+FolderFlow is a Windows desktop application published by TechDeckLabs (TECHDECKLABS LLP), with source and support maintained in the [FolderFlow project](https://github.com/agbautomated/FolderFlow). This policy describes the application in this repository, including its planned Microsoft Store distribution.
 
 ## Your files stay on your computer
 
