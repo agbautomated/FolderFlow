@@ -4,12 +4,6 @@ By **TechDeckLabs** (**TECHDECKLABS LLP**).
 
 A small Windows desktop application for copying folders between connected drives. Choose **Copy from**, choose **Copy to**, and select **Start Copy**. FolderFlow runs the real RoboCopy included with Windows.
 
-## Microsoft Store preparation
-
-The project includes a Windows 11 MSIX packaging path for a proposed one-time paid Store release. See the [account and submission guide](docs/STORE-SUBMISSION.md), [packaging instructions](packaging/README.md), [listing draft](docs/STORE-LISTING-DRAFT.md), and [privacy policy](docs/PRIVACY.md). The initial recommendation is paid upfront with no trial.
-
-A development MSIX has passed package-structure validation. The final Store identity, account verification, Partner Center price entry and regional review, installed-package tests, and Microsoft certification are still required. The approved launch targets are US$4.99 base and ₹299 for India; see [pricing](docs/PRICING.md). The development identity must not be uploaded as the Store product. See [Store validation status](docs/STORE-VALIDATION.md) and the [prepared screenshot captions and evidence](docs/STORE-SCREENSHOTS.md).
-
 ## Run
 
 This repository contains the application source, tests, and build scripts. Build the app using the steps below, or, if you already have `FolderFlow-Windows-x64.zip`, extract it and open `FolderFlow.exe` inside the extracted folder. Alternatively, open `Launch FolderFlow.cmd` alongside the source to start an existing portable build. Keep the complete portable folder together. The portable app does not need administrator rights or a separate .NET installation. The executable is unsigned, so Windows may identify it as an unfamiliar application.
